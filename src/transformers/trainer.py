@@ -1296,6 +1296,8 @@ class Trainer:
 
         output = self.prediction_loop(eval_dataloader, description="Evaluation")
 
+        output.metrics["eval_perplexity"] = math.exp(output.metrics["eval_loss"])
+
         self.log(output.metrics)
 
         if self.args.tpu_metrics_debug or self.args.debug:
