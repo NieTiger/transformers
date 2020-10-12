@@ -794,6 +794,7 @@ class Trainer:
                         logs: Dict[str, float] = {}
                         tr_loss_scalar = tr_loss.item()
                         logs["loss"] = (tr_loss_scalar - logging_loss_scalar) / self.args.logging_steps
+                        logs["perplexity"] = np.exp(logs["loss"])
                         # backward compatibility for pytorch schedulers
                         logs["learning_rate"] = (
                             self.lr_scheduler.get_last_lr()[0]
